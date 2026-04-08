@@ -9,96 +9,72 @@
 <body>
 
   <!-- ===== Header ===== -->
-  <h1>Tibetan Interlinear Translation Tool (TITT) <small>Version A</small></h1>
-  <p class="subtitle">One Tibetan source &rarr; multiple target languages (English, Hebrew, Russian)</p>
+  <h1>Tibetan Interlinear Translation Tool (TITT) <small>v A.0.1</small></h1>
+  <p class="subtitle">Tibetan source &rarr; English, Hebrew, Russian</p>
 
   <details class="tech-details">
     <summary>Technical details</summary>
-    <p>TITT is a local HTML tool for interlinear translation from Tibetan into one or more target languages. It provides structured fields for source text, translations, correspondences, and notes. Hebrew fields support right-to-left text.</p>
-    <p>Built with HTML, CSS, and JavaScript. Open the saved HTML file in any modern browser (Firefox recommended for contenteditable support).</p>
+    <p>TITT is a local HTML tool for interlinear translation from Tibetan into one or more target languages. Hebrew fields support right-to-left text. Built with HTML, CSS, and JavaScript. Firefox recommended.</p>
   </details>
 
   <hr>
 
   <!-- ===== Input Menu ===== -->
   <div class="header-bar" id="input-menu">
-    <span class="section-label">Input Menu</span>
+    <span class="section-label">Input</span>
     <a href="#output-menu" class="jump-link">Jump to bottom &darr;</a>
   </div>
 
   <!-- Language toggles -->
-  <span class="section-label">Active languages</span>
   <div class="language-toggles">
-    <label><input type="checkbox" checked disabled> English (always on)</label>
+    <label><input type="checkbox" checked disabled> English</label>
     <label><input type="checkbox" id="toggleHebrew"> Hebrew</label>
     <label><input type="checkbox" id="toggleRussian"> Russian</label>
+  </div>
+
+  <!-- View Toolbar -->
+  <div class="view-toolbar">
+    <div class="view-toolbar-row">
+      <span class="toolbar-label">Visible:</span>
+      <button class="pill active" id="vis-english">English</button>
+      <button class="pill" id="vis-hebrew">Hebrew</button>
+      <button class="pill" id="vis-russian">Russian</button>
+      <button class="pill active" id="vis-correspondences">Correspondences</button>
+      <button class="pill active" id="vis-notes">Notes</button>
+      <span class="toolbar-separator"></span>
+      <button class="pill active" id="vis-fieldnames">Labels</button>
+      <button class="pill active" id="vis-sidebar">Sidebar</button>
+    </div>
+    <div class="view-toolbar-row">
+      <span class="toolbar-label">Dropdowns:</span>
+      <button class="pill-action" id="expandAll">Expand all</button>
+      <button class="pill-action" id="collapseAll">Collapse all</button>
+    </div>
   </div>
 
   <!-- Tibetan text importer -->
   <span class="section-label">Tibetan text importer</span>
   <textarea id="importBox" placeholder="Paste Tibetan text here (Uchen or Wylie)"></textarea>
-  <div style="margin:8px 0;">
-    <button id="importTibetanBtn" class="btn-primary">Import Tibetan text</button>
+  <div class="importer-options">
+    <span style="font-size:0.8rem;color:var(--text-muted);font-weight:600;">Break at:</span>
+    <label><input type="checkbox" id="breakDoubleShad" checked> Double shad (། །)</label>
+    <label><input type="checkbox" id="breakSingleShad"> Single shad (།)</label>
+    <label><input type="checkbox" id="breakNewline"> Newline</label>
+    <label><input type="checkbox" id="breakWhitespace"> Multiple spaces</label>
+    <label>Custom: <input type="text" id="breakCustom" class="break-custom-input" placeholder="e.g. ||"></label>
+  </div>
+  <div style="margin:6px 0;">
+    <button id="importTibetanBtn" class="btn-primary">Import</button>
   </div>
   <details class="importer-instructions">
     <summary>Importer instructions</summary>
     <p>
-      Paste an ACIP e-text (or any Uchen / Wylie text) into the box above and click <em>Import Tibetan text</em>.
-      The importer splits text at double-shad (། །) boundaries and adds one block per line to the work area.<br><br>
-      You can find Tibetan e-texts via the <a href="http://databases.aibs.columbia.edu/">AIBS database</a> or
-      <a href="https://asianclassics.org/library/downloads/">ACIP downloads</a>.<br><br>
-      To convert Wylie to Uchen (or vice versa) before importing, use a
-      <a href="https://www.thlib.org/reference/transliteration/wyconverter.php">Tibetan script converter</a>.
+      Paste a Tibetan text (Uchen or Wylie) and choose how to split it into blocks. The default splits at double-shad (། །).
+      You can combine options &mdash; e.g. double-shad + newline &mdash; to handle varied formatting.<br><br>
+      ACIP e-texts: <a href="https://asianclassics.org/library/downloads/">ACIP downloads</a><br>
+      Script converter: <a href="https://www.thlib.org/reference/transliteration/wyconverter.php">THL Wylie converter</a>
     </p>
   </details>
-
-  <!-- SHOC menu -->
-  <span class="section-label">SHOC menu (Show / Hide / Open / Close)</span>
-  <div class="shoc-grid">
-    <span class="shoc-label">Show:</span>
-    <span class="shoc-buttons show-btns">
-      <button id="showEnglish">English</button>
-      <button id="showHebrew">Hebrew</button>
-      <button id="showRussian">Russian</button>
-      <button id="showCorrespondences">Correspondences</button>
-      <button id="showNotes">Notes</button>
-      <button id="showAll">All fields</button>
-      <button id="showFieldNames">Field names</button>
-      <button id="showSidebar">Sidebar</button>
-    </span>
-
-    <span class="shoc-label">Hide:</span>
-    <span class="shoc-buttons hide-btns">
-      <button id="hideEnglish">English</button>
-      <button id="hideHebrew">Hebrew</button>
-      <button id="hideRussian">Russian</button>
-      <button id="hideCorrespondences">Correspondences</button>
-      <button id="hideNotes">Notes</button>
-      <button id="hideAll">All fields</button>
-      <button id="hideFieldNames">Field names</button>
-      <button id="hideSidebar">Sidebar</button>
-    </span>
-
-    <span class="shoc-label">Open:</span>
-    <span class="shoc-buttons open-btns">
-      <button id="openEnglish">English</button>
-      <button id="openHebrew">Hebrew</button>
-      <button id="openRussian">Russian</button>
-      <button id="openCorrespondences">Correspondences</button>
-      <button id="openNotes">Notes</button>
-      <button id="openAll">All fields</button>
-    </span>
-
-    <span class="shoc-label">Close:</span>
-    <span class="shoc-buttons close-btns">
-      <button id="closeEnglish">English</button>
-      <button id="closeHebrew">Hebrew</button>
-      <button id="closeRussian">Russian</button>
-      <button id="closeCorrespondences">Correspondences</button>
-      <button id="closeNotes">Notes</button>
-      <button id="closeAll">All fields</button>
-    </span>
-  </div>
 
   <!-- Project notes -->
   <span class="section-label">Project notes</span>
@@ -110,12 +86,13 @@
   <span class="section-label">Work area</span>
   <div id="work-area">
 
-    <!-- Sample block 1 -->
+    <!-- Single example block -->
     <div class="block">
+      <input type="checkbox" class="block-select" title="Select this block">
       <div class="source-wrapper">
         <p class="tibetan" contenteditable>ཕུང་པོ་ལྔ་ནི་གཟུགས་ཀྱི་ཕུང་པོ་དང༌། ཚོར་བའི་ཕུང་པོ་དང༌། འདུ་ཤེས་ཀྱི་ཕུང་པོ་དང༌། འདུ་བྱེད་ཀྱི་ཕུང་པོ་དང༌། རྣམ་པར་ཤེས་པའི་ཕུང་པོའོ། །</p>
       </div>
-      <details class="english-dropdown">
+      <details class="english-dropdown" open>
         <summary class="field-name">English</summary>
         <p class="english" contenteditable>The five aggregates are the aggregate of form, the aggregate of feeling, the aggregate of perception, the aggregate of formations, and the aggregate of consciousness.</p>
       </details>
@@ -133,46 +110,13 @@
       </details>
       <details class="notes-dropdown">
         <summary class="field-name">Notes</summary>
-        <p class="notes" contenteditable>Sample block from Vasubandhu's Pancaskandhaka. Delete this block before starting your own project.</p>
+        <p class="notes" contenteditable>Sample block. Delete before starting your project.</p>
       </details>
       <div class="sidebar">
-        <button class="up" title="Move this block up">&and;</button>
-        <button class="delete" title="Delete this block">&minus;</button>
-        <button class="insert" title="Insert new block below">&#43;</button>
-        <button class="down" title="Move this block down">&or;</button>
-      </div>
-    </div>
-
-    <!-- Sample block 2 -->
-    <div class="block">
-      <div class="source-wrapper">
-        <p class="tibetan" contenteditable>གཟུགས་གང་ཞེ་ན། གཟུགས་གང་ཡིན་པ་ཅི་ཡང་རུང་སྟེ། དེ་དག་ཐམས་ཅད་འབྱུང་བ་ཆེན་པོ་བཞི་དག་དང༌། འབྱུང་བ་ཆེན་པོའི་བཞི་དག་རྒྱུར་བྱས་པའོ། །</p>
-      </div>
-      <details class="english-dropdown">
-        <summary class="field-name">English</summary>
-        <p class="english" contenteditable>What is form? Anything at all which is form, that is the four great elements and that which derives from the four great elements.</p>
-      </details>
-      <details class="hebrew-dropdown">
-        <summary class="field-name">Hebrew</summary>
-        <p class="hebrew" contenteditable dir="rtl">Add hebrew</p>
-      </details>
-      <details class="russian-dropdown">
-        <summary class="field-name">Russian</summary>
-        <p class="russian" contenteditable>Add russian</p>
-      </details>
-      <details class="correspondences-dropdown">
-        <summary class="field-name">Correspondences</summary>
-        <p class="correspondences" contenteditable>འབྱུང་བ་ཆེན་པོ་བཞི་དག་, four great elements<br>འབྱུང་བ་ཆེན་པོའི་བཞི་དག་རྒྱུར་བྱས་པ་, that which derives from the four great elements</p>
-      </details>
-      <details class="notes-dropdown">
-        <summary class="field-name">Notes</summary>
-        <p class="notes" contenteditable>Add notes</p>
-      </details>
-      <div class="sidebar">
-        <button class="up" title="Move this block up">&and;</button>
-        <button class="delete" title="Delete this block">&minus;</button>
-        <button class="insert" title="Insert new block below">&#43;</button>
-        <button class="down" title="Move this block down">&or;</button>
+        <button class="up" title="Move up">&and;</button>
+        <button class="delete" title="Delete">&minus;</button>
+        <button class="insert" title="Insert below">&#43;</button>
+        <button class="down" title="Move down">&or;</button>
       </div>
     </div>
 
@@ -185,26 +129,29 @@
     <button id="savePage" class="btn-info">Save current page</button>
   </div>
 
-  <div class="mass-delete-group">
-    <button id="massDeleteBtn" class="btn-danger">Delete blocks in range:</button>
+  <div class="delete-controls">
+    <button id="selectAllBlocks" style="font-size:0.8rem;">Select all</button>
+    <button id="deselectAllBlocks" style="font-size:0.8rem;">Deselect all</button>
+    <button id="deleteSelectedBtn" class="btn-danger">Delete selected</button>
+    <button id="deleteAllBtn" class="btn-danger">Delete all</button>
+    <span class="toolbar-separator"></span>
+    <button id="massDeleteBtn" class="btn-danger">Delete range:</button>
     <input id="rangeMin" type="number" placeholder="First #">
     <input id="rangeMax" type="number" placeholder="Last #">
   </div>
 
   <div style="margin: 8px 0;">
-    <button id="parseHTMLBtn" style="background:#fff9c4;border-color:#f9a825;">Parse HTML</button>
-    <button id="purgeHTMLBtn" style="background:#f3e5f5;border-color:#ab47bc;">Purge HTML</button>
+    <button id="parseHTMLBtn" style="background:#fff9c4;border-color:#f9a825;font-size:0.8rem;">Parse HTML</button>
+    <button id="purgeHTMLBtn" style="background:#f3e5f5;border-color:#ab47bc;font-size:0.8rem;">Purge HTML</button>
   </div>
 
   <hr>
 
   <!-- ===== Output Menu ===== -->
   <div class="header-bar" id="output-menu">
-    <span class="section-label">Output Menu</span>
+    <span class="section-label">Output</span>
     <a href="#input-menu" class="jump-link">Jump to top &uarr;</a>
   </div>
-
-  <p style="font-size:0.85rem;color:var(--text-muted);margin:4px 0 8px;">Output text from the work area:</p>
 
   <div class="output-group">
     <div class="group-label">Block-by-block:</div>
@@ -218,7 +165,7 @@
   </div>
 
   <div class="output-group">
-    <div class="group-label">Interlinear (block-by-block):</div>
+    <div class="group-label">Interlinear:</div>
     <div class="group-buttons">
       <button id="outTibEnBlock">Tibetan + English</button>
       <button id="outTibHeBlock">Tibetan + Hebrew</button>
@@ -238,7 +185,7 @@
   </div>
 
   <div class="output-group">
-    <div class="group-label">Correspondence chart (choose column separator):</div>
+    <div class="group-label">Correspondence chart (column separator):</div>
     <div class="group-buttons">
       <button id="corrComma">comma (,)</button>
       <button id="corrEquals">equals (=)</button>
@@ -248,13 +195,13 @@
     </div>
   </div>
 
-  <div class="output-section" style="border-top:1px dotted var(--border);padding-top:12px;margin-top:16px;">
-    <p style="font-size:0.85rem;color:var(--text-muted);margin:0 0 6px;">Output text from an input box:</p>
+  <div class="output-section">
+    <span class="section-label">Process text</span>
     <textarea id="outputInputBox" placeholder="Paste text here for processing"></textarea>
     <div style="margin:8px 0;display:flex;flex-wrap:wrap;gap:4px;">
       <button id="outInputLineByLine">Line-by-line Tibetan</button>
       <button id="outInputContinuous">Continuous</button>
-      <button id="outInputRemoveSpaces">Remove extra spaces &amp; lines</button>
+      <button id="outInputRemoveSpaces">Remove extra spaces</button>
       <button id="clearOutput">Clear output</button>
     </div>
   </div>

@@ -1,10 +1,10 @@
 /* ===== TITT — Tibetan Interlinear Translation Tool ===== */
+/* Version A.0.1 */
 
 /* --- Custom Properties --- */
 :root {
   --bg: #f5f5f0;
   --bg-field: #ffffff;
-  --bg-dropdown: var(--bg);
   --text: #1a1a1a;
   --text-muted: #4a5568;
   --accent: #4a7c6f;
@@ -32,10 +32,10 @@ body {
   margin: 0;
   padding: 20px 24px 40px 60px;
   font-family: 'Segoe UI', system-ui, -apple-system, Arial, sans-serif;
-  font-size: 15px;
+  font-size: 17px;
   color: var(--text);
   background: var(--bg);
-  line-height: 1.5;
+  line-height: 1.55;
 }
 
 /* --- Typography --- */
@@ -46,25 +46,23 @@ h1 {
   color: var(--accent);
 }
 h1 small {
-  font-size: 0.75rem;
+  font-size: 0.7rem;
   font-weight: 400;
   color: var(--text-muted);
   margin-left: 8px;
 }
 .subtitle {
   color: var(--text-muted);
-  font-size: 0.85rem;
+  font-size: 0.9rem;
   margin: 0 0 12px 0;
 }
 
 /* --- Links --- */
-a {
-  color: var(--accent);
-}
+a { color: var(--accent); }
 
 /* --- Section Headers --- */
 .section-label {
-  font-size: 0.8rem;
+  font-size: 0.78rem;
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.04em;
@@ -80,9 +78,7 @@ a {
   align-items: baseline;
   margin-bottom: 4px;
 }
-.header-bar .jump-link {
-  font-size: 0.8rem;
-}
+.header-bar .jump-link { font-size: 0.8rem; }
 
 /* --- Horizontal Rule --- */
 hr {
@@ -94,8 +90,8 @@ hr {
 /* --- Buttons --- */
 button {
   cursor: pointer;
-  font-size: 0.8rem;
-  padding: 4px 10px;
+  font-size: 0.85rem;
+  padding: 5px 12px;
   border: 1px solid var(--border);
   border-radius: var(--radius);
   background: var(--bg-field);
@@ -111,40 +107,36 @@ button.btn-primary {
   color: white;
   border-color: var(--accent);
 }
-button.btn-primary:hover {
-  background: #3d6b5f;
-}
+button.btn-primary:hover { background: #3d6b5f; }
 button.btn-danger {
   background: var(--danger-light);
   color: #c62828;
   border-color: var(--danger);
 }
-button.btn-danger:hover {
-  background: var(--danger);
-  color: white;
-}
+button.btn-danger:hover { background: var(--danger); color: white; }
 button.btn-success {
   background: var(--success-light);
   color: #2e7d32;
   border-color: var(--success);
 }
-button.btn-success:hover {
-  background: var(--success);
-  color: white;
-}
+button.btn-success:hover { background: var(--success); color: white; }
 button.btn-info {
   background: var(--info-light);
   color: #1565c0;
   border-color: var(--info);
 }
-button.btn-info:hover {
-  background: var(--info);
-  color: white;
-}
+button.btn-info:hover { background: var(--info); color: white; }
 
 /* --- Inputs --- */
 input[type="number"] {
   max-width: 110px;
+  padding: 5px 8px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  font-size: 0.9rem;
+}
+input[type="text"].break-custom-input {
+  width: 80px;
   padding: 4px 8px;
   border: 1px solid var(--border);
   border-radius: var(--radius);
@@ -159,7 +151,7 @@ textarea {
   max-width: 800px;
   height: 60px;
   font-family: inherit;
-  font-size: 0.9rem;
+  font-size: 0.95rem;
   resize: vertical;
 }
 
@@ -169,44 +161,8 @@ details.tech-details {
   font-size: 0.85rem;
   color: var(--text-muted);
 }
-details.tech-details summary {
-  cursor: pointer;
-  font-style: italic;
-}
-details.tech-details p {
-  margin: 6px 0;
-  padding-left: 16px;
-  font-style: italic;
-}
-
-/* --- SHOC Buttons Grid --- */
-.shoc-grid {
-  display: grid;
-  grid-template-columns: auto 1fr;
-  gap: 4px 10px;
-  align-items: center;
-  font-size: 0.8rem;
-  margin: 6px 0 12px 0;
-}
-.shoc-grid .shoc-label {
-  font-weight: 600;
-  color: var(--text-muted);
-  white-space: nowrap;
-}
-.shoc-grid .shoc-buttons {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 4px;
-}
-.shoc-grid .shoc-buttons button {
-  font-size: 0.75rem;
-  padding: 2px 8px;
-}
-/* SHOC color hints */
-.shoc-grid .shoc-buttons.show-btns button { background: var(--success-light); border-color: var(--success); color: #2e7d32; }
-.shoc-grid .shoc-buttons.hide-btns button { background: #f3f3f3; border-color: #999; color: #555; }
-.shoc-grid .shoc-buttons.open-btns button { background: var(--accent-light); border-color: var(--accent); color: var(--accent); }
-.shoc-grid .shoc-buttons.close-btns button { background: var(--danger-light); border-color: var(--danger); color: #c62828; }
+details.tech-details summary { cursor: pointer; font-style: italic; }
+details.tech-details p { margin: 6px 0; padding-left: 16px; font-style: italic; }
 
 /* --- Language Toggles --- */
 .language-toggles {
@@ -214,22 +170,118 @@ details.tech-details p {
   gap: 16px;
   align-items: center;
   margin: 8px 0;
-  font-size: 0.85rem;
+  font-size: 0.9rem;
 }
 .language-toggles label {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  cursor: pointer;
+  user-select: none;
+}
+.language-toggles input[type="checkbox"] {
+  accent-color: var(--accent);
+  width: 16px;
+  height: 16px;
+}
+
+/* ===== VIEW TOOLBAR (replaces SHOC) ===== */
+.view-toolbar {
+  background: var(--bg-field);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 10px 14px;
+  margin: 10px 0 14px 0;
+  max-width: 800px;
+}
+.view-toolbar-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+  margin-bottom: 6px;
+}
+.view-toolbar-row:last-child { margin-bottom: 0; }
+.view-toolbar-row .toolbar-label {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  min-width: 68px;
+  flex-shrink: 0;
+}
+/* Toggle pill buttons */
+.pill {
+  font-size: 0.8rem;
+  padding: 3px 12px;
+  border: 1px solid var(--border);
+  border-radius: 100px;
+  background: var(--bg);
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: all var(--transition);
+  user-select: none;
+}
+.pill:hover { border-color: var(--accent); color: var(--accent); }
+.pill.active {
+  background: var(--accent);
+  color: white;
+  border-color: var(--accent);
+}
+.pill.active:hover {
+  background: #3d6b5f;
+}
+/* Small action pills (expand/collapse) */
+.pill-action {
+  font-size: 0.78rem;
+  padding: 2px 10px;
+  border: 1px solid var(--border);
+  border-radius: 100px;
+  background: transparent;
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: all var(--transition);
+}
+.pill-action:hover { border-color: var(--accent); color: var(--accent); }
+
+.toolbar-separator {
+  width: 1px;
+  height: 18px;
+  background: var(--border);
+  margin: 0 4px;
+  flex-shrink: 0;
+}
+
+/* --- Importer --- */
+.importer-options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 18px;
+  align-items: center;
+  margin: 6px 0 10px 0;
+  font-size: 0.85rem;
+}
+.importer-options label {
   display: flex;
   align-items: center;
   gap: 4px;
   cursor: pointer;
   user-select: none;
 }
-.language-toggles input[type="checkbox"] {
+.importer-options input[type="checkbox"] {
   accent-color: var(--accent);
 }
+details.importer-instructions {
+  font-size: 0.82rem;
+  margin: 6px 0;
+}
+details.importer-instructions summary { cursor: pointer; color: var(--text-muted); }
+details.importer-instructions p { padding: 4px 16px; color: var(--text-muted); font-style: italic; line-height: 1.6; }
 
 /* --- Project Notes --- */
 .project-notes {
-  font-size: 0.85rem;
+  font-size: 0.9rem;
   padding: 8px 12px;
   background: var(--bg-field);
   border: 1px solid var(--border);
@@ -239,33 +291,34 @@ details.tech-details p {
   margin: 4px 0 12px 0;
 }
 
-/* --- Importer Instructions --- */
-details.importer-instructions {
-  font-size: 0.8rem;
-  margin: 6px 0;
-}
-details.importer-instructions summary {
-  cursor: pointer;
-  color: var(--text-muted);
-}
-details.importer-instructions p {
-  padding: 4px 16px;
-  color: var(--text-muted);
-  font-style: italic;
-  line-height: 1.6;
-}
-
 /* ===== WORK AREA ===== */
 
-/* --- Block (sentence) --- */
+/* --- Block --- */
 .block {
   position: relative;
-  padding: 20px 0 16px 0;
+  padding: 18px 0 14px 0;
   border-top: 1px solid var(--border-light);
   counter-increment: blocknum;
 }
 .block:last-of-type {
   border-bottom: 1px solid var(--border-light);
+}
+
+/* Block selection checkbox */
+.block-select {
+  position: absolute;
+  left: -38px;
+  top: 20px;
+  width: 15px;
+  height: 15px;
+  accent-color: var(--accent);
+  cursor: pointer;
+  opacity: 0;
+  transition: opacity var(--transition);
+}
+.block:hover .block-select,
+.block-select:checked {
+  opacity: 1;
 }
 
 /* --- Source field (Tibetan) --- */
@@ -276,7 +329,7 @@ details.importer-instructions p {
   overflow: hidden;
 }
 p.tibetan {
-  font-size: 1.2rem;
+  font-size: 1.25rem;
   margin: 0;
   padding: 8px 12px 8px 56px;
   white-space: pre-wrap;
@@ -290,14 +343,11 @@ p.tibetan::marker {
   font-size: 0.85rem;
   color: var(--text-muted);
 }
-/* Fix child elements inside contenteditable inheriting wrong bg */
-p.tibetan * {
-  background: var(--bg-field);
-}
+p.tibetan * { background: var(--bg-field); }
 
 /* --- Dropdown fields --- */
 .block details {
-  margin: 8px 0 0 0;
+  margin: 6px 0 0 0;
   padding-left: 8px;
 }
 .block details summary {
@@ -307,57 +357,55 @@ p.tibetan * {
   user-select: none;
   padding: 2px 0;
 }
-.block details summary:hover {
-  color: var(--accent);
-}
+.block details summary:hover { color: var(--accent); }
 .block details p {
   margin: 4px 0 4px 20px;
   padding: 6px 10px;
-  font-size: 0.95rem;
+  font-size: 1rem;
   color: var(--text);
   min-height: 1.4em;
   border-left: 2px solid var(--border-light);
 }
-.block details p * {
-  background: transparent;
-}
+.block details p * { background: transparent; }
 
 /* --- RTL fields (Hebrew) --- */
-p.hebrew, .hebrew-translation p {
+p.hebrew {
   direction: rtl;
   text-align: right;
   unicode-bidi: plaintext;
 }
-/* Give Hebrew fields a subtle visual indicator */
+
+/* --- Language indicator badges --- */
 details.hebrew-dropdown summary::after {
-  content: " ‏עב";
-  font-size: 0.7rem;
-  color: #aaa;
+  content: " \200F\05E2\05D1";
+  font-size: 0.65rem;
+  color: #bbb;
   margin-left: 6px;
 }
-
-/* --- Russian fields --- */
 details.russian-dropdown summary::after {
-  content: " ру";
-  font-size: 0.7rem;
-  color: #aaa;
+  content: " \0440\0443";
+  font-size: 0.65rem;
+  color: #bbb;
   margin-left: 6px;
 }
 
-/* --- Field name hiding (SHOC target) --- */
-.block details summary.field-name {
-  display: list-item;
-}
+/* --- SHOC display rules (CSS targets for JS) --- */
+/* Each selector must appear exactly once so JS can find & toggle */
+.english-dropdown  { display: block; }
+.hebrew-dropdown   { display: none; }
+.russian-dropdown  { display: none; }
+.correspondences-dropdown { display: block; }
+.notes-dropdown    { display: block; }
+summary.field-name { display: list-item; }
 
 /* --- Sidebar --- */
 .sidebar {
   display: flex;
   flex-direction: column;
   position: absolute;
-  left: -36px;
-  top: 0;
-  height: 100%;
-  justify-content: space-evenly;
+  right: -36px;
+  top: 50%;
+  transform: translateY(-50%);
   gap: 2px;
 }
 .sidebar button {
@@ -369,35 +417,9 @@ details.russian-dropdown summary::after {
   border-radius: 3px;
   line-height: 1;
 }
-.sidebar button:hover {
-  background: var(--border-light);
-  color: var(--text);
-}
-
-/* --- SHOC display rules (CSS targets for JS manipulation) --- */
-/* These selectors must each appear exactly once so JS can find & toggle them */
-.english-dropdown {
-  display: block;
-}
-.hebrew-dropdown {
-  display: block;
-}
-.russian-dropdown {
-  display: block;
-}
-.correspondences-dropdown {
-  display: block;
-}
-.notes-dropdown {
-  display: block;
-}
-summary.field-name {
-  display: list-item;
-}
-/* sidebar visibility already declared above */
+.sidebar button:hover { background: var(--border-light); color: var(--text); }
 
 /* ===== BOTTOM CONTROLS ===== */
-
 .bottom-controls {
   display: flex;
   gap: 8px;
@@ -405,10 +427,11 @@ summary.field-name {
   flex-wrap: wrap;
   margin: 12px 0;
 }
-.mass-delete-group {
+.delete-controls {
   display: flex;
   gap: 6px;
   align-items: center;
+  flex-wrap: wrap;
   margin: 8px 0;
 }
 
@@ -419,7 +442,7 @@ summary.field-name {
   border-top: 1px solid var(--border);
 }
 .output-group {
-  font-size: 0.8rem;
+  font-size: 0.85rem;
   margin: 8px 0;
 }
 .output-group .group-label {
@@ -441,30 +464,21 @@ summary.field-name {
   border: 1px solid var(--border);
   border-radius: var(--radius);
   min-height: 60px;
-  font-size: 0.95rem;
+  font-size: 1rem;
   line-height: 1.6;
 }
-#displayBox table {
-  border-collapse: collapse;
-  width: 100%;
-}
-#displayBox td {
-  border: 1px solid var(--border);
-  padding: 3px 8px;
-}
-#displayBox .empty-notice {
-  color: var(--text-muted);
-  font-style: italic;
-}
+#displayBox table { border-collapse: collapse; width: 100%; }
+#displayBox td { border: 1px solid var(--border); padding: 3px 8px; }
+#displayBox .empty-notice { color: var(--text-muted); font-style: italic; }
 
 /* --- Utility --- */
 .spacer { height: 20px; }
-.hidden { display: none !important; }
 
 /* --- Print --- */
 @media print {
-  .sidebar, .shoc-grid, .bottom-controls, .output-section,
-  .language-toggles, .importer-instructions, textarea,
-  button, .header-bar .jump-link, details.tech-details { display: none !important; }
+  .sidebar, .view-toolbar, .bottom-controls, .output-section,
+  .delete-controls, .language-toggles, .importer-instructions,
+  textarea, button, .header-bar .jump-link, details.tech-details,
+  .importer-options, .block-select { display: none !important; }
   body { padding: 10px; }
 }
