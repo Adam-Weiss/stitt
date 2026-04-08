@@ -1,0 +1,470 @@
+/* ===== TITT — Tibetan Interlinear Translation Tool ===== */
+
+/* --- Custom Properties --- */
+:root {
+  --bg: #f5f5f0;
+  --bg-field: #ffffff;
+  --bg-dropdown: var(--bg);
+  --text: #1a1a1a;
+  --text-muted: #4a5568;
+  --accent: #4a7c6f;
+  --accent-light: #e6f0ec;
+  --border: #d1d5db;
+  --border-light: #e5e7eb;
+  --danger: #e57373;
+  --danger-light: #fce4e4;
+  --success: #66bb6a;
+  --success-light: #e8f5e9;
+  --info: #64b5f6;
+  --info-light: #e3f2fd;
+  --radius: 6px;
+  --shadow-sm: 0 1px 2px rgba(0,0,0,0.06);
+  --shadow: 0 2px 6px rgba(0,0,0,0.08);
+  --transition: 0.15s ease;
+  counter-reset: blocknum;
+}
+
+/* --- Reset & Base --- */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+body {
+  margin: 0;
+  padding: 20px 24px 40px 60px;
+  font-family: 'Segoe UI', system-ui, -apple-system, Arial, sans-serif;
+  font-size: 15px;
+  color: var(--text);
+  background: var(--bg);
+  line-height: 1.5;
+}
+
+/* --- Typography --- */
+h1 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin: 0 0 4px 0;
+  color: var(--accent);
+}
+h1 small {
+  font-size: 0.75rem;
+  font-weight: 400;
+  color: var(--text-muted);
+  margin-left: 8px;
+}
+.subtitle {
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  margin: 0 0 12px 0;
+}
+
+/* --- Links --- */
+a {
+  color: var(--accent);
+}
+
+/* --- Section Headers --- */
+.section-label {
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--text-muted);
+  margin: 16px 0 6px 0;
+  display: block;
+}
+
+/* --- Header Bar --- */
+.header-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 4px;
+}
+.header-bar .jump-link {
+  font-size: 0.8rem;
+}
+
+/* --- Horizontal Rule --- */
+hr {
+  border: none;
+  border-top: 1px solid var(--border-light);
+  margin: 16px 0;
+}
+
+/* --- Buttons --- */
+button {
+  cursor: pointer;
+  font-size: 0.8rem;
+  padding: 4px 10px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--bg-field);
+  color: var(--text);
+  transition: background var(--transition), border-color var(--transition);
+}
+button:hover {
+  background: var(--border-light);
+  border-color: #bbb;
+}
+button.btn-primary {
+  background: var(--accent);
+  color: white;
+  border-color: var(--accent);
+}
+button.btn-primary:hover {
+  background: #3d6b5f;
+}
+button.btn-danger {
+  background: var(--danger-light);
+  color: #c62828;
+  border-color: var(--danger);
+}
+button.btn-danger:hover {
+  background: var(--danger);
+  color: white;
+}
+button.btn-success {
+  background: var(--success-light);
+  color: #2e7d32;
+  border-color: var(--success);
+}
+button.btn-success:hover {
+  background: var(--success);
+  color: white;
+}
+button.btn-info {
+  background: var(--info-light);
+  color: #1565c0;
+  border-color: var(--info);
+}
+button.btn-info:hover {
+  background: var(--info);
+  color: white;
+}
+
+/* --- Inputs --- */
+input[type="number"] {
+  max-width: 110px;
+  padding: 4px 8px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  font-size: 0.85rem;
+}
+textarea {
+  padding: 10px;
+  background: var(--bg-field);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  width: 90%;
+  max-width: 800px;
+  height: 60px;
+  font-family: inherit;
+  font-size: 0.9rem;
+  resize: vertical;
+}
+
+/* --- Technical Details --- */
+details.tech-details {
+  margin: 8px 0;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+details.tech-details summary {
+  cursor: pointer;
+  font-style: italic;
+}
+details.tech-details p {
+  margin: 6px 0;
+  padding-left: 16px;
+  font-style: italic;
+}
+
+/* --- SHOC Buttons Grid --- */
+.shoc-grid {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 4px 10px;
+  align-items: center;
+  font-size: 0.8rem;
+  margin: 6px 0 12px 0;
+}
+.shoc-grid .shoc-label {
+  font-weight: 600;
+  color: var(--text-muted);
+  white-space: nowrap;
+}
+.shoc-grid .shoc-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+.shoc-grid .shoc-buttons button {
+  font-size: 0.75rem;
+  padding: 2px 8px;
+}
+/* SHOC color hints */
+.shoc-grid .shoc-buttons.show-btns button { background: var(--success-light); border-color: var(--success); color: #2e7d32; }
+.shoc-grid .shoc-buttons.hide-btns button { background: #f3f3f3; border-color: #999; color: #555; }
+.shoc-grid .shoc-buttons.open-btns button { background: var(--accent-light); border-color: var(--accent); color: var(--accent); }
+.shoc-grid .shoc-buttons.close-btns button { background: var(--danger-light); border-color: var(--danger); color: #c62828; }
+
+/* --- Language Toggles --- */
+.language-toggles {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  margin: 8px 0;
+  font-size: 0.85rem;
+}
+.language-toggles label {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  cursor: pointer;
+  user-select: none;
+}
+.language-toggles input[type="checkbox"] {
+  accent-color: var(--accent);
+}
+
+/* --- Project Notes --- */
+.project-notes {
+  font-size: 0.85rem;
+  padding: 8px 12px;
+  background: var(--bg-field);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  min-height: 40px;
+  max-width: 800px;
+  margin: 4px 0 12px 0;
+}
+
+/* --- Importer Instructions --- */
+details.importer-instructions {
+  font-size: 0.8rem;
+  margin: 6px 0;
+}
+details.importer-instructions summary {
+  cursor: pointer;
+  color: var(--text-muted);
+}
+details.importer-instructions p {
+  padding: 4px 16px;
+  color: var(--text-muted);
+  font-style: italic;
+  line-height: 1.6;
+}
+
+/* ===== WORK AREA ===== */
+
+/* --- Block (sentence) --- */
+.block {
+  position: relative;
+  padding: 20px 0 16px 0;
+  border-top: 1px solid var(--border-light);
+  counter-increment: blocknum;
+}
+.block:last-of-type {
+  border-bottom: 1px solid var(--border-light);
+}
+
+/* --- Source field (Tibetan) --- */
+.source-wrapper {
+  background: var(--bg-field);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-sm);
+  overflow: hidden;
+}
+p.tibetan {
+  font-size: 1.2rem;
+  margin: 0;
+  padding: 8px 12px 8px 56px;
+  white-space: pre-wrap;
+  background: var(--bg-field);
+  min-height: 1.6em;
+  display: list-item;
+  list-style-position: inside;
+}
+p.tibetan::marker {
+  content: counter(blocknum) ". ";
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+/* Fix child elements inside contenteditable inheriting wrong bg */
+p.tibetan * {
+  background: var(--bg-field);
+}
+
+/* --- Dropdown fields --- */
+.block details {
+  margin: 8px 0 0 0;
+  padding-left: 8px;
+}
+.block details summary {
+  cursor: pointer;
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  user-select: none;
+  padding: 2px 0;
+}
+.block details summary:hover {
+  color: var(--accent);
+}
+.block details p {
+  margin: 4px 0 4px 20px;
+  padding: 6px 10px;
+  font-size: 0.95rem;
+  color: var(--text);
+  min-height: 1.4em;
+  border-left: 2px solid var(--border-light);
+}
+.block details p * {
+  background: transparent;
+}
+
+/* --- RTL fields (Hebrew) --- */
+p.hebrew, .hebrew-translation p {
+  direction: rtl;
+  text-align: right;
+  unicode-bidi: plaintext;
+}
+/* Give Hebrew fields a subtle visual indicator */
+details.hebrew-dropdown summary::after {
+  content: " ‏עב";
+  font-size: 0.7rem;
+  color: #aaa;
+  margin-left: 6px;
+}
+
+/* --- Russian fields --- */
+details.russian-dropdown summary::after {
+  content: " ру";
+  font-size: 0.7rem;
+  color: #aaa;
+  margin-left: 6px;
+}
+
+/* --- Field name hiding (SHOC target) --- */
+.block details summary.field-name {
+  display: list-item;
+}
+
+/* --- Sidebar --- */
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  left: -36px;
+  top: 0;
+  height: 100%;
+  justify-content: space-evenly;
+  gap: 2px;
+}
+.sidebar button {
+  font-size: 0.75rem;
+  padding: 2px 5px;
+  border: 1px solid var(--border-light);
+  background: var(--bg);
+  color: var(--text-muted);
+  border-radius: 3px;
+  line-height: 1;
+}
+.sidebar button:hover {
+  background: var(--border-light);
+  color: var(--text);
+}
+
+/* --- SHOC display rules (CSS targets for JS manipulation) --- */
+/* These selectors must each appear exactly once so JS can find & toggle them */
+.english-dropdown {
+  display: block;
+}
+.hebrew-dropdown {
+  display: block;
+}
+.russian-dropdown {
+  display: block;
+}
+.correspondences-dropdown {
+  display: block;
+}
+.notes-dropdown {
+  display: block;
+}
+summary.field-name {
+  display: list-item;
+}
+/* sidebar visibility already declared above */
+
+/* ===== BOTTOM CONTROLS ===== */
+
+.bottom-controls {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  flex-wrap: wrap;
+  margin: 12px 0;
+}
+.mass-delete-group {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+  margin: 8px 0;
+}
+
+/* --- Output Menu --- */
+.output-section {
+  margin-top: 16px;
+  padding-top: 12px;
+  border-top: 1px solid var(--border);
+}
+.output-group {
+  font-size: 0.8rem;
+  margin: 8px 0;
+}
+.output-group .group-label {
+  font-weight: 600;
+  color: var(--text-muted);
+  margin-bottom: 4px;
+}
+.output-group .group-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+
+/* --- Display Box --- */
+#displayBox {
+  margin: 16px 0;
+  padding: 12px 16px;
+  background: var(--bg-field);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  min-height: 60px;
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+#displayBox table {
+  border-collapse: collapse;
+  width: 100%;
+}
+#displayBox td {
+  border: 1px solid var(--border);
+  padding: 3px 8px;
+}
+#displayBox .empty-notice {
+  color: var(--text-muted);
+  font-style: italic;
+}
+
+/* --- Utility --- */
+.spacer { height: 20px; }
+.hidden { display: none !important; }
+
+/* --- Print --- */
+@media print {
+  .sidebar, .shoc-grid, .bottom-controls, .output-section,
+  .language-toggles, .importer-instructions, textarea,
+  button, .header-bar .jump-link, details.tech-details { display: none !important; }
+  body { padding: 10px; }
+}
