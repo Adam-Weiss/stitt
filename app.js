@@ -1,5 +1,5 @@
 /* ===== TITT — Tibetan Interlinear Translation Tool ===== */
-/* Version A.0.1 */
+/* Version A.0.1.1 */
 
 (function () {
   'use strict';
@@ -180,6 +180,75 @@
   });
   $('#deselectAllBlocks').addEventListener('click', () => {
     $$('.block-select').forEach(cb => { cb.checked = false; });
+  });
+
+  // ───────────────────────────────────────────────
+  // Merge selected blocks
+  // ───────────────────────────────────────────────
+  $('#mergeSelectedBtn').addEventListener('click', () => {
+    const allBlocks = Array.from($$('.block'));
+    // Get indices of checked blocks
+    const selectedIndices = [];
+    allBlocks.forEach((b, i) => {
+      const cb = b.querySelector('.block-select');
+      if (cb && cb.checked) selectedIndices.push(i);
+    });
+    if (selectedIndices.length < 2) return;
+
+    // Find consecutive runs
+    const runs = [];
+    let run = [selectedIndices[0]];
+    for (let i = 1; i < selectedIndices.length; i++) {
+      if (selectedIndices[i] === selectedIndices[i - 1] + 1) {
+        run.push(selectedIndices[i]);
+      } else {
+        if (run.length >= 2) runs.push(run);
+        run = [selectedIndices[i]];
+      }
+    }
+    if (run.length >= 2) runs.push(run);
+
+    if (runs.length === 0) {
+      alert('No consecutive blocks selected. Select adjacent blocks to merge.');
+      return;
+    }
+
+    // The field keys whose text content we merge
+    const mergeKeys = ['tibetan', 'english', 'hebrew', 'russian', 'correspondences', 'notes'];
+
+    // Process runs in reverse so indices stay valid
+    for (let r = runs.length - 1; r >= 0; r--) {
+      const indices = runs[r];
+      const targetBlock = allBlocks[indices[0]];
+
+      for (const key of mergeKeys) {
+        const targetP = targetBlock.querySelector('p.' + key);
+        if (!targetP) continue;
+        // Separator: space for tibetan, <br> for correspondences/notes, space for translations
+        const sep = (key === 'correspondences' || key === 'notes') ? '<br>' : ' ';
+        const parts = [targetP.innerHTML];
+        for (let j = 1; j < indices.length; j++) {
+          const srcP = allBlocks[indices[j]].querySelector('p.' + key);
+          if (srcP) {
+            const content = srcP.innerHTML.trim();
+            // Skip placeholder text
+            if (content && !content.startsWith('Add ')) {
+              parts.push(content);
+            }
+          }
+        }
+        targetP.innerHTML = parts.join(sep);
+      }
+
+      // Remove merged blocks (all except the first in the run)
+      for (let j = indices.length - 1; j >= 1; j--) {
+        allBlocks[indices[j]].remove();
+      }
+
+      // Uncheck the surviving block
+      const cb = targetBlock.querySelector('.block-select');
+      if (cb) cb.checked = false;
+    }
   });
 
   // ───────────────────────────────────────────────
